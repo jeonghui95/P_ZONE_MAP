@@ -81,6 +81,16 @@ DATABASES = {
     }
 }
 
+MARIADB = {
+    'default': {
+        'DB_NAME': 'p_zone',
+        'DB_USER': 'admin',
+        'DB_PASSWORD': 'Wjdgml119!',
+        'DB_HOST': 'pzone-db.cm53ld3fibe2.ap-northeast-1.rds.amazonaws.com',
+        'DB_PORT': '3306',
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
