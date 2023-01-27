@@ -2,10 +2,9 @@ import os
 import pymysql
 import json
 from django.shortcuts import render
-import requests
 import json
 import time
-
+from P_ZONE_MAP.settings import DATABASES
 
 
 def geo(request):
@@ -17,10 +16,16 @@ def geo(request):
 
 def find_P_ZONE(request):
 
-    host = os.environ('DB_HOST')
-    user = os.environ('DB_USER')
-    password = os.environ('DB_PASSWORD')
-    db = os.environ('DB_NAME')
+    #
+    # host = DATABASES['default']["DB_HOST"]
+    # user = DATABASES['default']["DB_USER"]
+    # password = DATABASES['default']["DB_PASSWORD"]
+    # db = DATABASES['default']["DB_NAME"]
+
+    host =os.environ("DB_HOST")
+    user =os.environ("DB_USER")
+    password=os.environ("DB_PASSWORD")
+    db=os.environ("DB_NAME")
 
     connect = pymysql.connect(host=host, user=user, password=password, port=3306, db=db)
     cursor = connect.cursor()
