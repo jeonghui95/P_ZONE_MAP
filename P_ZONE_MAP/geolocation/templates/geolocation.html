@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script
+	src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx0ffb87c22bdb45ae8facaeeb7958ad36"></script>
+<script type="text/javascript">
+	var map;
+	var marker_s, marker_e, marker_p1, marker_p2;
+	var totalMarkerArr = [];
+	var drawInfoArr = [];
+	var resultdrawArr = [];
+    // resultData는 변수로 받아옴...
+    // var resultData = [{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.02102140621453, 37.51423096958477]}, 'properties': {'totalDistance': 386, 'totalTime': 368, 'index': 0, 'pointIndex': 0, 'name': '', 'description': '60m 이동', 'direction': '', 'nearPoiName': '', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '', 'facilityType': '11', 'facilityName': '', 'turnType': 200, 'pointType': 'SP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.02102140621453, 37.51423096958477], [127.02085751739446, 37.51475590564801]]}, 'properties': {'index': 1, 'lineIndex': 0, 'name': '', 'description': ', 60m', 'distance': 60, 'time': 46, 'roadType': 0, 'categoryRoadType': 0, 'facilityType': '11', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.02085751739446, 37.51475590564801]}, 'properties': {'index': 2, 'pointIndex': 1, 'name': '하영전자', 'description': '하영전자 에서 좌회전 후 52m 이동 ', 'direction': '', 'nearPoiName': '하영전자', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '', 'facilityType': '11', 'facilityName': '', 'turnType': 12, 'pointType': 'GP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.02085751739446, 37.51475590564801], [127.02028812809073, 37.514639242314516]]}, 'properties': {'index': 3, 'lineIndex': 1, 'name': '', 'description': ', 52m', 'distance': 52, 'time': 40, 'roadType': 22, 'categoryRoadType': 0, 'facilityType': '11', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.02028812809073, 37.514639242314516]}, 'properties': {'index': 4, 'pointIndex': 2, 'name': '대림빌딩', 'description': '대림빌딩 에서 우회전 후 강남대로 을 따라 151m 이동 ', 'direction': '', 'nearPoiName': '대림빌딩', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '', 'facilityType': '11', 'facilityName': '', 'turnType': 13, 'pointType': 'GP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.02028812809073, 37.514639242314516], [127.02000479430679, 37.51556690721547], [127.0199936831857, 37.51560301393165], [127.01998257230034, 37.51563078828269], [127.01996312758305, 37.51570300176491], [127.01997145913622, 37.515739108830104], [127.0199797905322, 37.51578077080539], [127.02000478660608, 37.515839097810115], [127.02002422794449, 37.515886314894935], [127.0200575562787, 37.51595575186942]]}, 'properties': {'index': 5, 'lineIndex': 2, 'name': '강남대로', 'description': '강남대로, 151m', 'distance': 151, 'time': 137, 'roadType': 22, 'categoryRoadType': 0, 'facilityType': '11', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.0200575562787, 37.51595575186942]}, 'properties': {'index': 6, 'pointIndex': 3, 'name': '서울보증보험 신사동지점', 'description': '서울보증보험 신사동지점 에서 좌측 횡단보도 후 12m 이동 ', 'direction': '', 'nearPoiName': '서울보증보험 신사동지점', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '', 'facilityType': '15', 'facilityName': '', 'turnType': 212, 'pointType': 'GP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.0200575562787, 37.51595575186942], [127.0199408984259, 37.516019631241356]]}, 'properties': {'index': 7, 'lineIndex': 3, 'name': '', 'description': ', 12m', 'distance': 12, 'time': 9, 'roadType': 21, 'categoryRoadType': 0, 'facilityType': '15', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.0199408984259, 37.516019631241356]}, 'properties': {'index': 8, 'pointIndex': 4, 'name': '', 'description': '직진 후 15m 이동 ', 'direction': '', 'nearPoiName': '', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '', 'facilityType': '11', 'facilityName': '', 'turnType': 11, 'pointType': 'GP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.0199408984259, 37.516019631241356], [127.01986868183576, 37.51605295940554], [127.01985756992887, 37.516116840672154]]}, 'properties': {'index': 9, 'lineIndex': 4, 'name': '', 'description': ', 15m', 'distance': 15, 'time': 40, 'roadType': 21, 'categoryRoadType': 0, 'facilityType': '11', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.01985756992887, 37.516116840672154]}, 'properties': {'index': 10, 'pointIndex': 5, 'name': '', 'description': '횡단보도 후 38m 이동 ', 'direction': '', 'nearPoiName': '', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '', 'facilityType': '15', 'facilityName': '', 'turnType': 211, 'pointType': 'GP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.01985756992887, 37.516116840672154], [127.01979089966612, 37.516458466446046]]}, 'properties': {'index': 11, 'lineIndex': 5, 'name': '', 'description': ', 38m', 'distance': 38, 'time': 26, 'roadType': 21, 'categoryRoadType': 0, 'facilityType': '15', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.01979089966612, 37.516458466446046]}, 'properties': {'index': 12, 'pointIndex': 6, 'name': '', 'description': '직진 후 11m 이동 ', 'direction': '', 'nearPoiName': '', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '', 'facilityType': '11', 'facilityName': '', 'turnType': 11, 'pointType': 'GP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.01979089966612, 37.516458466446046], [127.01977701062721, 37.51650846038754], [127.01979367451925, 37.51655289996741]]}, 'properties': {'index': 13, 'lineIndex': 6, 'name': '', 'description': ', 11m', 'distance': 11, 'time': 37, 'roadType': 21, 'categoryRoadType': 0, 'facilityType': '11', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.01979367451925, 37.51655289996741]}, 'properties': {'index': 14, 'pointIndex': 7, 'name': '', 'description': '횡단보도 후 보행자도로 을 따라 12m 이동 ', 'direction': '', 'nearPoiName': '', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '', 'facilityType': '15', 'facilityName': '', 'turnType': 211, 'pointType': 'GP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.01979367451925, 37.51655289996741], [127.0198353344065, 37.516658444006985]]}, 'properties': {'index': 15, 'lineIndex': 7, 'name': '보행자도로', 'description': '보행자도로, 12m', 'distance': 12, 'time': 9, 'roadType': 21, 'categoryRoadType': 0, 'facilityType': '15', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.0198353344065, 37.516658444006985]}, 'properties': {'index': 16, 'pointIndex': 8, 'name': '신사역  6번출구', 'description': '신사역  6번출구 에서 우회전 후 도산대로 을 따라 35m 이동 ', 'direction': '', 'nearPoiName': '신사역  6번출구', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '신사역', 'facilityType': '11', 'facilityName': '', 'turnType': 13, 'pointType': 'GP'}}, {'type': 'Feature', 'geometry': {'type': 'LineString', 'coordinates': [[127.0198353344065, 37.516658444006985], [127.01995476931263, 37.51661122941525], [127.01996865701567, 37.51660845220951], [127.02006031549419, 37.51660289894483], [127.02009086811081, 37.516608454403396], [127.02015475102611, 37.516614010460295], [127.02020196839918, 37.51663345349325]]}, 'properties': {'index': 17, 'lineIndex': 8, 'name': '도산대로', 'description': '도산대로, 35m', 'distance': 35, 'time': 24, 'roadType': 21, 'categoryRoadType': 0, 'facilityType': '11', 'facilityName': ''}}, {'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [127.02020196839918, 37.51663345349325]}, 'properties': {'index': 18, 'pointIndex': 9, 'name': '주차장', 'description': '도착', 'direction': '', 'nearPoiName': '주차장', 'nearPoiX': '0.0', 'nearPoiY': '0.0', 'intersectionName': '주차장', 'facilityType': '', 'facilityName': '', 'turnType': 201, 'pointType': 'EP'}}];
+    // var nearest = "{{context|escapejs}}";
+    var nearest = JSON.parse("{{ nearest|escapejs }}")
+    var resultData = nearest.features;
+    var resultLen = resultData.length;
+
+	function initTmap() {
+        // 1. 지도 그리기
+		map = new Tmapv2.Map("map_div", {
+		center : new Tmapv2.LatLng(resultData[0].geometry.coordinates[1], resultData[0].geometry.coordinates[0]),
+			width : "100%",
+			height : "400px",
+			zoom : 16,
+			zoomControl : true,
+			scrollwheel : true
+		});
+
+		// 2. 시작, 도착 심볼찍기
+		// 현 위치
+		marker_s = new Tmapv2.Marker(
+				{
+					position : new Tmapv2.LatLng(resultData[0].geometry.coordinates[1], resultData[0].geometry.coordinates[0]),
+					icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
+					iconSize : new Tmapv2.Size(24, 38),
+					map : map
+				});
+
+		// 도착
+		marker_e = new Tmapv2.Marker(
+				{
+					position : new Tmapv2.LatLng(resultData[resultLen-1].geometry.coordinates[1], resultData[resultLen-1].geometry.coordinates[0]),
+					icon : "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
+					iconSize : new Tmapv2.Size(24, 38),
+					map : map
+				});
+
+        var tDistance = "총 거리 : "
+                + ((resultData[0].properties.totalDistance) / 1000)
+                        .toFixed(1) + "km,";
+        var tTime = " 총 시간 : "
+                + ((resultData[0].properties.totalTime) / 60)
+                        .toFixed(0) + "분";
+
+        $("#result").text(tDistance + tTime);
+
+
+        for (var i in resultData) { //for문 [S]
+            var geometry = resultData[i].geometry;
+            var properties = resultData[i].properties;
+            var polyline_;
+
+
+            if (geometry.type == "LineString") {
+                for (var j in geometry.coordinates) {
+                    // 경로들의 결과값(구간)들을 포인트 객체로 변환
+                    var latlng = new Tmapv2.Point(
+                            geometry.coordinates[j][0],
+                            geometry.coordinates[j][1]);
+                    // 포인트객체의 정보로 좌표값 변환 객체로 저장
+                    var convertChange = new Tmapv2.LatLng(
+                        latlng.y,
+                        latlng.x);
+                    // 배열에 담기
+                    drawInfoArr.push(convertChange);
+                }
+            } else {
+                var markerImg = "";
+                var pType = "";
+                var size;
+
+                if (properties.pointType == "SP") { //출발지 마커
+                    markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";
+                    pType = "S";
+                    size = new Tmapv2.Size(24, 38);
+                } else if (properties.pointType == "EP") { //도착지 마커
+                    markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
+                    pType = "E";
+                    size = new Tmapv2.Size(24, 38);
+                } else { //각 포인트 마커
+                    markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+                    pType = "P";
+                    size = new Tmapv2.Size(8, 8);
+                }
+
+                // 경로들의 결과값들을 포인트 객체로 변환
+                var latlon = new Tmapv2.Point(
+                        geometry.coordinates[0],
+                        geometry.coordinates[1]);
+
+                var routeInfoObj = {
+                    markerImage : markerImg,
+                    lng : latlon.y,
+                    lat : latlon.x,
+                    pointType : pType
+                };
+
+                // Marker 추가
+                marker_p = new Tmapv2.Marker(
+                        {
+                            position : new Tmapv2.LatLng(
+                                    routeInfoObj.lat,
+                                    routeInfoObj.lng),
+                            icon : routeInfoObj.markerImage,
+                            iconSize : size,
+                            map : map
+                        });
+            }
+        }//for문 [E]
+        drawLine(drawInfoArr);
+    }
+
+	function drawLine(arrPoint) {
+		var polyline_;
+
+		polyline_ = new Tmapv2.Polyline({
+			path : arrPoint,
+			strokeColor : "#DD0000",
+			strokeWeight : 6,
+			map : map
+		});
+		resultdrawArr.push(polyline_);
+	}
+</script>
+</head>
+
+<body onload="initTmap();">
+
+		<!-- 190430 기존 지도를 모두 이미지 처리 위해 주석 처리 S -->
+		<div id="map_wrap" class="map_wrap3">
+			<div id="map_div"></div>
+		</div>
+		<div class="map_act_btn_wrap clear_box"></div>
+		<p id="result"></p>
+		<br/>
+</body>
+
+</html>
