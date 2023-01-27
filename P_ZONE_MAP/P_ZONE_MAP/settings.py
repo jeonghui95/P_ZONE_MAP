@@ -20,8 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ("DJNAGO_SECRET")
-SECRET_KEY = 'django-insecure-b2=-iul+ox15if-*tr6wz34vkjt=$l5i=s#$7u42e_b!76v9hi'
+SECRET_KEY = os.environ("DJNAGO_SECRET")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -81,15 +80,6 @@ DATABASES = {
     }
 }
 
-MARIADB = {
-    'default': {
-        'DB_NAME': 'p_zone',
-        'DB_USER': 'admin',
-        'DB_PASSWORD': 'Wjdgml119!',
-        'DB_HOST': 'pzone-db.cm53ld3fibe2.ap-northeast-1.rds.amazonaws.com',
-        'DB_PORT': '3306',
-    }
-}
 
 
 # Password validation
