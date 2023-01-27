@@ -1,6 +1,8 @@
 import os
 import pymysql
 import json
+
+from django.http import HttpResponse
 from django.shortcuts import render
 import requests
 import json
@@ -21,11 +23,13 @@ def find_P_ZONE(request):
     # user = MARIADB['default']["DB_USER"]
     # password = MARIADB['default']["DB_PASSWORD"]
     # db = MARIADB['default']["DB_NAME"]
-
-    host =os.environ("DB_HOST")
-    user =os.environ("DB_USER")
-    password=os.environ("DB_PASSWORD")
-    db=os.environ("DB_NAME")
+    try:
+        host =os.environ("DB_HOST")
+        user =os.environ("DB_USER")
+        password=os.environ("DB_PASSWORD")
+        db=os.environ("DB_NAME")
+    except:
+        HttpResponse("NO PARAMETER")
 
     connect = pymysql.connect(host=host, user=user, password=password, port=3306, db=db)
     cursor = connect.cursor()
