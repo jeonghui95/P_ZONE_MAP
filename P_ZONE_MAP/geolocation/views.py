@@ -7,7 +7,7 @@ from django.shortcuts import render
 import requests
 import json
 import time
-from P_ZONE_MAP.settings import DATABASES, MARIADB
+from P_ZONE_MAP.settings import DATABASES
 
 
 def geo(request):
