@@ -16,16 +16,16 @@ def geo(request):
 
 
 def find_P_ZONE(request):
+    #
+    # host = MARIADB['default']["DB_HOST"]
+    # user = MARIADB['default']["DB_USER"]
+    # password = MARIADB['default']["DB_PASSWORD"]
+    # db = MARIADB['default']["DB_NAME"]
 
-    host = MARIADB['default']["DB_HOST"]
-    user = MARIADB['default']["DB_USER"]
-    password = MARIADB['default']["DB_PASSWORD"]
-    db = MARIADB['default']["DB_NAME"]
-
-    # host =os.environ("DB_HOST")
-    # user =os.environ("DB_USER")
-    # password=os.environ("DB_PASSWORD")
-    # db=os.environ("DB_NAME")
+    host =os.environ("DB_HOST")
+    user =os.environ("DB_USER")
+    password=os.environ("DB_PASSWORD")
+    db=os.environ("DB_NAME")
 
     connect = pymysql.connect(host=host, user=user, password=password, port=3306, db=db)
     cursor = connect.cursor()
