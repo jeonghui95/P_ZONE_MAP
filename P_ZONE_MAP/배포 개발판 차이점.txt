@@ -1,0 +1,5 @@
+settings secretkey , db source
+view osenviron longitude,latitude
+index url
+
+

@@ -48,6 +48,7 @@ def find_P_ZONE(request):
     longitude = float(request.GET.get('longitude'))
     latitude = float(request.GET.get('latitude'))
 
+
     minTime = 1000000000000
     for idx,row in enumerate(rows):  # row
         time.sleep(0.6)

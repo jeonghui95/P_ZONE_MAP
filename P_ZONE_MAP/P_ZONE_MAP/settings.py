@@ -95,6 +95,7 @@ MARIADB = {
     }
 }
 
+# pzone-db.cm53ld3fibe2.ap-northeast-1.rds.amazonaws.com
 
 
 # Password validation
@@ -147,3 +148,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+CSRF_TRUSTED_ORIGINS = ['https://*.pzone.site',
+                        'https://*.127.0.0.1',
+                        'http://*.18.177.143.210'
+                        ]
